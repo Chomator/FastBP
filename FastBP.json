@@ -1,0 +1,1748 @@
+{
+    "Memory": {
+      "Basic": {
+        "ALL": [
+          "VirtualAlloc",
+          "VirtualFree",
+          "VirtualProtect",
+          "VirtualQuery",
+          "VirtualAllocEx",
+          "VirtualFreeEx",
+          "VirtualProtectEx",
+          "VirtualQueryEx"
+        ],
+        "VirtualAlloc": [
+          "kernel32:VirtualAlloc",
+          "Reserves, commits, or changes the state of memory"
+        ],
+        "VirtualFree": [
+          "kernel32:VirtualFree",
+          "Releases, decommits, or releases and decommits memory"
+        ],
+        "VirtualProtect": [
+          "kernel32:VirtualProtect",
+          "Changes the protection on a region of committed memory"
+        ],
+        "VirtualQuery": [
+          "kernel32:VirtualQuery",
+          "Provides information about a range of pages"
+        ],
+        "VirtualAllocEx": [
+          "kernel32:VirtualAllocEx",
+          "Reserves, commits, or changes the state of memory in another process"
+        ],
+        "VirtualFreeEx": [
+          "kernel32:VirtualFreeEx",
+          "Releases, decommits, or releases and decommits memory in another process"
+        ],
+        "VirtualProtectEx": [
+          "kernel32:VirtualProtectEx",
+          "Changes the protection on memory in another process"
+        ],
+        "VirtualQueryEx": [
+          "kernel32:VirtualQueryEx",
+          "Provides information about a range of pages in another process"
+        ]
+      },
+      "Heap": {
+        "ALL": [
+          "HeapAlloc",
+          "HeapFree",
+          "HeapCreate",
+          "HeapDestroy",
+          "HeapReAlloc",
+          "HeapSize",
+          "HeapCompact",
+          "HeapLock",
+          "HeapUnlock",
+          "HeapValidate",
+          "HeapWalk"
+        ],
+        "HeapAlloc": [
+          "kernel32:HeapAlloc",
+          "Allocates a block of memory from a heap"
+        ],
+        "HeapFree": [
+          "kernel32:HeapFree",
+          "Frees a memory block allocated from a heap"
+        ],
+        "HeapCreate": [
+          "kernel32:HeapCreate",
+          "Creates a private heap object"
+        ],
+        "HeapDestroy": [
+          "kernel32:HeapDestroy",
+          "Destroys the specified heap object"
+        ],
+        "HeapReAlloc": [
+          "kernel32:HeapReAlloc",
+          "Reallocates a block of memory from a heap"
+        ],
+        "HeapSize": [
+          "kernel32:HeapSize",
+          "Returns the size of a memory block allocated from a heap"
+        ],
+        "HeapCompact": [
+          "kernel32:HeapCompact",
+          "Attempts to compact the specified heap"
+        ],
+        "HeapLock": [
+          "kernel32:HeapLock",
+          "Attempts to acquire the critical section object for the specified heap"
+        ],
+        "HeapUnlock": [
+          "kernel32:HeapUnlock",
+          "Releases the critical section object for the specified heap"
+        ],
+        "HeapValidate": [
+          "kernel32:HeapValidate",
+          "Validates the specified heap"
+        ],
+        "HeapWalk": [
+          "kernel32:HeapWalk",
+          "Enumerates the memory blocks in the specified heap"
+        ]
+      },
+      "X86_Global": {
+        "ALL": [
+          "GlobalAlloc",
+          "GlobalFree",
+          "GlobalHandle",
+          "GlobalLock",
+          "GlobalUnlock",
+          "GlobalSize",
+          "GlobalReAlloc"
+        ],
+        "GlobalAlloc": [
+          "kernel32:GlobalAlloc",
+          "Allocates the specified number of bytes from the heap"
+        ],
+        "GlobalFree": [
+          "kernel32:GlobalFree",
+          "Frees the specified global memory object"
+        ],
+        "GlobalHandle": [
+          "kernel32:GlobalHandle",
+          "Retrieves the handle associated with the specified pointer to a global memory block"
+        ],
+        "GlobalLock": [
+          "kernel32:GlobalLock",
+          "Locks a global memory object and returns a pointer to the first byte of the object's memory block"
+        ],
+        "GlobalUnlock": [
+          "kernel32:GlobalUnlock",
+          "Decrements the lock count associated with a memory object"
+        ],
+        "GlobalSize": [
+          "kernel32:GlobalSize",
+          "Returns the current size of the specified global memory object"
+        ],
+        "GlobalReAlloc": [
+          "kernel32:GlobalReAlloc",
+          "Changes the size or attributes of a specified global memory object"
+        ]
+      },
+      "X86_Local": {
+        "ALL": [
+          "LocalAlloc",
+          "LocalFree",
+          "LocalLock",
+          "LocalUnlock",
+          "LocalSize",
+          "LocalReAlloc",
+          "LocalHandle"
+        ],
+        "LocalAlloc": [
+          "kernel32:LocalAlloc",
+          "Allocates the specified number of bytes from the heap"
+        ],
+        "LocalFree": [
+          "kernel32:LocalFree",
+          "Frees the specified local memory object"
+        ],
+        "LocalLock": [
+          "kernel32:LocalLock",
+          "Locks a local memory object and returns a pointer to the first byte of the object's memory block"
+        ],
+        "LocalUnlock": [
+          "kernel32:LocalUnlock",
+          "Decrements the lock count associated with a memory object"
+        ],
+        "LocalSize": [
+          "kernel32:LocalSize",
+          "Returns the current size of the specified local memory object"
+        ],
+        "LocalReAlloc": [
+          "kernel32:LocalReAlloc",
+          "Changes the size or attributes of a specified local memory object"
+        ],
+        "LocalHandle": [
+          "kernel32:LocalHandle",
+          "Retrieves the handle associated with the specified pointer to a local memory block"
+        ]
+      },
+      "ProcessMemory": {
+        "ALL": [
+          "ReadProcessMemory",
+          "WriteProcessMemory",
+          "FlushInstructionCache",
+          "GetProcessWorkingSetSize",
+          "SetProcessWorkingSetSize",
+          "GetProcessDEPPolicy",
+          "SetProcessDEPPolicy"
+        ],
+        "ReadProcessMemory": [
+          "kernel32:ReadProcessMemory",
+          "Reads data from an area in another process"
+        ],
+        "WriteProcessMemory": [
+          "kernel32:WriteProcessMemory",
+          "Writes data to an area in another process"
+        ],
+        "FlushInstructionCache": [
+          "kernel32:FlushInstructionCache",
+          "Flushes the instruction cache for the specified process"
+        ],
+        "GetProcessWorkingSetSize": [
+          "kernel32:GetProcessWorkingSetSize",
+          "Retrieves the minimum and maximum working set sizes of the specified process"
+        ],
+        "SetProcessWorkingSetSize": [
+          "kernel32:SetProcessWorkingSetSize",
+          "Sets the minimum and maximum working set sizes for the specified process"
+        ],
+        "GetProcessDEPPolicy": [
+          "kernel32:GetProcessDEPPolicy",
+          "Retrieves the DEP policy of the specified process"
+        ],
+        "SetProcessDEPPolicy": [
+          "kernel32:SetProcessDEPPolicy",
+          "Sets the DEP policy for the current process"
+        ]
+      },
+      "MappedFiles": {
+        "ALL": [
+          "CreateFileMapping",
+          "OpenFileMapping",
+          "MapViewOfFile",
+          "MapViewOfFileEx",
+          "UnmapViewOfFile",
+          "FlushViewOfFile",
+          "GetMappedFileName"
+        ],
+        "CreateFileMapping": [
+          "kernel32:CreateFileMapping",
+          "Creates or opens a named or unnamed file mapping object"
+        ],
+        "OpenFileMapping": [
+          "kernel32:OpenFileMapping",
+          "Opens a named file mapping object"
+        ],
+        "MapViewOfFile": [
+          "kernel32:MapViewOfFile",
+          "Maps a view of a file mapping into the address space"
+        ],
+        "MapViewOfFileEx": [
+          "kernel32:MapViewOfFileEx",
+          "Maps a view of a file mapping at a specified address"
+        ],
+        "UnmapViewOfFile": [
+          "kernel32:UnmapViewOfFile",
+          "Unmaps a mapped view of a file from the process address space"
+        ],
+        "FlushViewOfFile": [
+          "kernel32:FlushViewOfFile",
+          "Writes to disk a byte range within a mapped view of a file"
+        ],
+        "GetMappedFileName": [
+          "kernel32:GetMappedFileName",
+          "Retrieves the file name for the specified mapped memory"
+        ]
+      },
+      "NTMemory": {
+        "ALL": [
+          "NtAllocateVirtualMemory",
+          "NtFreeVirtualMemory",
+          "NtProtectVirtualMemory"
+        ],
+        "NtAllocateVirtualMemory": [
+          "ntdll:NtAllocateVirtualMemory",
+          "System service to allocate virtual memory"
+        ],
+        "NtFreeVirtualMemory": [
+          "ntdll:NtFreeVirtualMemory",
+          "System service to free virtual memory"
+        ],
+        "NtProtectVirtualMemory": [
+          "ntdll:NtProtectVirtualMemory",
+          "System service to change memory protection"
+        ]
+      },
+      "AWE": {
+        "ALL": [
+          "AllocateUserPhysicalPages",
+          "FreeUserPhysicalPages",
+          "MapUserPhysicalPages",
+          "MapUserPhysicalPagesScatter"
+        ],
+        "AllocateUserPhysicalPages": [
+          "kernel32:AllocateUserPhysicalPages",
+          "Allocates physical memory pages for use with Address Windows Extensions (AWE)"
+        ],
+        "FreeUserPhysicalPages": [
+          "kernel32:FreeUserPhysicalPages",
+          "Releases previously allocated physical memory pages"
+        ],
+        "MapUserPhysicalPages": [
+          "kernel32:MapUserPhysicalPages",
+          "Maps physical pages in the calling process's virtual address space"
+        ],
+        "MapUserPhysicalPagesScatter": [
+          "kernel32:MapUserPhysicalPagesScatter",
+          "Maps physical pages at specified addresses in the calling process's virtual address space"
+        ]
+      },
+      "DEP": {
+        "ALL": [
+          "VirtualAllocExNuma",
+          "GetWriteWatch",
+          "ResetWriteWatch"
+        ],
+        "VirtualAllocExNuma": [
+          "kernel32:VirtualAllocExNuma",
+          "Reserves, commits, or changes the state of memory in an NUMA node"
+        ],
+        "GetWriteWatch": [
+          "kernel32:GetWriteWatch",
+          "Retrieves addresses of pages that have been written to in a region of memory"
+        ],
+        "ResetWriteWatch": [
+          "kernel32:ResetWriteWatch",
+          "Resets the write-tracking state for a region of memory"
+        ]
+      },
+      "Special": {
+        "ALL": [
+          "SetProcessWorkingSetSize",
+          "GetProcessHeap",
+          "GetProcessHeaps",
+          "RtlAllocateHeap",
+          "RtlFreeHeap",
+          "RtlReAllocateHeap",
+          "NtMapViewOfSection",
+          "HeapValidate",
+          "HeapWalk"
+        ],
+        "SetProcessWorkingSetSize": [
+          "kernel32:SetProcessWorkingSetSize",
+          "Sets the minimum and maximum working set sizes"
+        ],
+        "GetProcessHeap": [
+          "kernel32:GetProcessHeap",
+          "Returns the handle of the default process heap"
+        ],
+        "GetProcessHeaps": [
+          "kernel32:GetProcessHeaps",
+          "Returns all heaps in the process"
+        ],
+        "RtlAllocateHeap": [
+          "ntdll:RtlAllocateHeap",
+          "Low-level function to allocate from a heap"
+        ],
+        "RtlFreeHeap": [
+          "ntdll:RtlFreeHeap",
+          "Low-level function to free heap memory"
+        ],
+        "RtlReAllocateHeap": [
+          "ntdll:RtlReAllocateHeap",
+          "Low-level function to reallocate heap memory"
+        ],
+        "NtMapViewOfSection": [
+          "ntdll:NtMapViewOfSection",
+          "Maps a view of a section into address space"
+        ],
+        "HeapValidate": [
+          "kernel32:HeapValidate",
+          "Validates the heap"
+        ],
+        "HeapWalk": [
+          "kernel32:HeapWalk",
+          "Enumerates allocated blocks in a heap"
+        ]
+      }
+    },
+    "WOW64": {
+      "FileSystemRedirection": {
+        "ALL": [
+          "Wow64EnableWow64FsRedirection",
+          "Wow64DisableWow64FsRedirection",
+          "Wow64RevertWow64FsRedirection"
+        ],
+        "Wow64EnableWow64FsRedirection": [
+          "kernel32:Wow64EnableWow64FsRedirection",
+          "Enables or disables file system redirection for the calling thread"
+        ],
+        "Wow64DisableWow64FsRedirection": [
+          "kernel32:Wow64DisableWow64FsRedirection",
+          "Disables file system redirection for the calling thread"
+        ],
+        "Wow64RevertWow64FsRedirection": [
+          "kernel32:Wow64RevertWow64FsRedirection",
+          "Restores file system redirection for the calling thread"
+        ]
+      },
+      "ProcessInfo": {
+        "ALL": [
+          "IsWow64Process",
+          "GetSystemWow64Directory",
+          "NtWow64ReadVirtualMemory64",
+          "NtWow64WriteVirtualMemory64",
+          "NtWow64QueryInformationProcess64",
+          "NtWow64AllocateVirtualMemory64",
+          "NtWow64GetNativeSystemInfo"
+        ],
+        "IsWow64Process": [
+          "kernel32:IsWow64Process",
+          "Determines whether the specified process is running under WOW64"
+        ],
+        "GetSystemWow64Directory": [
+          "kernel32:GetSystemWow64Directory",
+          "Retrieves the path of the system directory used by WOW64"
+        ],
+        "NtWow64ReadVirtualMemory64": [
+          "ntdll:NtWow64ReadVirtualMemory64",
+          "Reads memory from a 64-bit address space from a 32-bit process"
+        ],
+        "NtWow64WriteVirtualMemory64": [
+          "ntdll:NtWow64WriteVirtualMemory64",
+          "Writes to memory at a 64-bit address from a 32-bit process"
+        ],
+        "NtWow64QueryInformationProcess64": [
+          "ntdll:NtWow64QueryInformationProcess64",
+          "Queries 64-bit process information from a 32-bit process"
+        ],
+        "NtWow64AllocateVirtualMemory64": [
+          "ntdll:NtWow64AllocateVirtualMemory64",
+          "Allocates memory at a 64-bit address from a 32-bit process"
+        ],
+        "NtWow64GetNativeSystemInfo": [
+          "ntdll:NtWow64GetNativeSystemInfo",
+          "Retrieves native system information in a WOW64 process"
+        ]
+      }
+    },
+    "X86Only": {
+      "SystemInfo": {
+        "ALL": [
+          "GetSystemInfo",
+          "GetLargePageMinimum",
+          "GetProcessHeaps"
+        ],
+        "GetSystemInfo": [
+          "kernel32:GetSystemInfo",
+          "Gets information about the current system (includes memory page size & allocation granularity)"
+        ],
+        "GetLargePageMinimum": [
+          "kernel32:GetLargePageMinimum",
+          "Returns the minimum large page size supported by the system"
+        ],
+        "GetProcessHeaps": [
+          "kernel32:GetProcessHeaps",
+          "Returns handles to all heaps in the calling process"
+        ]
+      }
+    },
+    "File": {
+      "Basic": {
+        "ALL": [
+          "CreateFileW",
+          "CreateFileA",
+          "ReadFile",
+          "WriteFile",
+          "CloseHandle",
+          "DeleteFileW",
+          "DeleteFileA",
+          "SetFilePointer",
+          "SetFilePointerEx"
+        ],
+        "CreateFileW": [
+          "kernel32:CreateFileW",
+          "Creates or opens a file or I/O device (Unicode)"
+        ],
+        "CreateFileA": [
+          "kernel32:CreateFileA",
+          "Creates or opens a file or I/O device (ANSI)"
+        ],
+        "ReadFile": [
+          "kernel32:ReadFile",
+          "Reads data from a file"
+        ],
+        "WriteFile": [
+          "kernel32:WriteFile",
+          "Writes data to a file"
+        ],
+        "CloseHandle": [
+          "kernel32:CloseHandle",
+          "Closes an open object handle"
+        ],
+        "DeleteFileW": [
+          "kernel32:DeleteFileW",
+          "Deletes an existing file (Unicode)"
+        ],
+        "DeleteFileA": [
+          "kernel32:DeleteFileA",
+          "Deletes an existing file (ANSI)"
+        ],
+        "SetFilePointer": [
+          "kernel32:SetFilePointer",
+          "Moves the file pointer of an open file"
+        ],
+        "SetFilePointerEx": [
+          "kernel32:SetFilePointerEx",
+          "Moves the file pointer of an open file (64-bit version)"
+        ]
+      },
+      "Attribute": {
+        "ALL": [
+          "GetFileAttributesW",
+          "GetFileAttributesA",
+          "SetFileAttributesW",
+          "SetFileAttributesA"
+        ],
+        "GetFileAttributesW": [
+          "kernel32:GetFileAttributesW",
+          "Retrieves attributes for a file or directory (Unicode)"
+        ],
+        "GetFileAttributesA": [
+          "kernel32:GetFileAttributesA",
+          "Retrieves attributes for a file or directory (ANSI)"
+        ],
+        "SetFileAttributesW": [
+          "kernel32:SetFileAttributesW",
+          "Sets the attributes for a file or directory (Unicode)"
+        ],
+        "SetFileAttributesA": [
+          "kernel32:SetFileAttributesA",
+          "Sets the attributes for a file or directory (ANSI)"
+        ]
+      },
+      "Directory": {
+        "ALL": [
+          "CreateDirectoryW",
+          "CreateDirectoryA",
+          "RemoveDirectoryW",
+          "RemoveDirectoryA"
+        ],
+        "CreateDirectoryW": [
+          "kernel32:CreateDirectoryW",
+          "Creates a new directory (Unicode)"
+        ],
+        "CreateDirectoryA": [
+          "kernel32:CreateDirectoryA",
+          "Creates a new directory (ANSI)"
+        ],
+        "RemoveDirectoryW": [
+          "kernel32:RemoveDirectoryW",
+          "Deletes an existing empty directory (Unicode)"
+        ],
+        "RemoveDirectoryA": [
+          "kernel32:RemoveDirectoryA",
+          "Deletes an existing empty directory (ANSI)"
+        ]
+      },
+      "Search": {
+        "ALL": [
+          "FindFirstFileW",
+          "FindFirstFileA",
+          "FindNextFileW",
+          "FindNextFileA"
+        ],
+        "FindFirstFileW": [
+          "kernel32:FindFirstFileW",
+          "Searches a directory for a file or subdirectory (Unicode)"
+        ],
+        "FindFirstFileA": [
+          "kernel32:FindFirstFileA",
+          "Searches a directory for a file or subdirectory (ANSI)"
+        ],
+        "FindNextFileW": [
+          "kernel32:FindNextFileW",
+          "Continues a file search (Unicode)"
+        ],
+        "FindNextFileA": [
+          "kernel32:FindNextFileA",
+          "Continues a file search (ANSI)"
+        ]
+      }
+    },
+    "Registry": {
+      "ALL": [
+        "RegOpenKeyExW",
+        "RegOpenKeyExA",
+        "RegCreateKeyExW",
+        "RegCreateKeyExA",
+        "RegSetValueExW",
+        "RegSetValueExA",
+        "RegGetValueW",
+        "RegGetValueA",
+        "RegDeleteKeyW",
+        "RegDeleteKeyA"
+      ],
+      "RegOpenKeyExW": [
+        "advapi32:RegOpenKeyExW",
+        "Opens the specified registry key (Unicode)"
+      ],
+      "RegOpenKeyExA": [
+        "advapi32:RegOpenKeyExA",
+        "Opens the specified registry key (ANSI)"
+      ],
+      "RegCreateKeyExW": [
+        "advapi32:RegCreateKeyExW",
+        "Creates the specified registry key (Unicode)"
+      ],
+      "RegCreateKeyExA": [
+        "advapi32:RegCreateKeyExA",
+        "Creates the specified registry key (ANSI)"
+      ],
+      "RegSetValueExW": [
+        "advapi32:RegSetValueExW",
+        "Sets the data and type of a value in a registry key (Unicode)"
+      ],
+      "RegSetValueExA": [
+        "advapi32:RegSetValueExA",
+        "Sets the data and type of a value in a registry key (ANSI)"
+      ],
+      "RegGetValueW": [
+        "advapi32:RegGetValueW",
+        "Retrieves the type and data for the specified registry value (Unicode)"
+      ],
+      "RegGetValueA": [
+        "advapi32:RegGetValueA",
+        "Retrieves the type and data for the specified registry value (ANSI)"
+      ],
+      "RegDeleteKeyW": [
+        "advapi32:RegDeleteKeyW",
+        "Deletes a subkey and its values (Unicode)"
+      ],
+      "RegDeleteKeyA": [
+        "advapi32:RegDeleteKeyA",
+        "Deletes a subkey and its values (ANSI)"
+      ]
+    },
+    "Network": {
+      "WinSock": {
+        "ALL": [
+          "socket",
+          "connect",
+          "bind",
+          "listen",
+          "accept",
+          "send",
+          "recv",
+          "sendto",
+          "recvfrom",
+          "closesocket",
+          "WSAStartup",
+          "WSACleanup",
+          "getaddrinfo",
+          "gethostbyname"
+        ],
+        "socket": [
+          "ws2_32:socket",
+          "Creates a socket"
+        ],
+        "connect": [
+          "ws2_32:connect",
+          "Establishes a connection to a socket"
+        ],
+        "bind": [
+          "ws2_32:bind",
+          "Associates a local address with a socket"
+        ],
+        "listen": [
+          "ws2_32:listen",
+          "Places a socket in a state in which it is listening for an incoming connection"
+        ],
+        "accept": [
+          "ws2_32:accept",
+          "Permits an incoming connection attempt on a socket"
+        ],
+        "send": [
+          "ws2_32:send",
+          "Sends data on a connected socket"
+        ],
+        "recv": [
+          "ws2_32:recv",
+          "Receives data from a connected socket"
+        ],
+        "sendto": [
+          "ws2_32:sendto",
+          "Sends data to a specific destination"
+        ],
+        "recvfrom": [
+          "ws2_32:recvfrom",
+          "Receives a datagram and stores the source address"
+        ],
+        "closesocket": [
+          "ws2_32:closesocket",
+          "Closes an existing socket"
+        ],
+        "WSAStartup": [
+          "ws2_32:WSAStartup",
+          "Initiates use of the Winsock DLL"
+        ],
+        "WSACleanup": [
+          "ws2_32:WSACleanup",
+          "Terminates use of the Winsock DLL"
+        ],
+        "getaddrinfo": [
+          "ws2_32:getaddrinfo",
+          "Provides protocol-independent translation from host name to address"
+        ],
+        "gethostbyname": [
+          "ws2_32:gethostbyname",
+          "Retrieves host information for a host name"
+        ]
+      },
+      "WinHTTP": {
+        "ALL": [
+          "WinHttpOpen",
+          "WinHttpConnect",
+          "WinHttpOpenRequest",
+          "WinHttpSendRequest",
+          "WinHttpReceiveResponse",
+          "WinHttpReadData"
+        ],
+        "WinHttpOpen": [
+          "winhttp:WinHttpOpen",
+          "Initializes the WinHTTP functions"
+        ],
+        "WinHttpConnect": [
+          "winhttp:WinHttpConnect",
+          "Specifies the initial target server of an HTTP request"
+        ],
+        "WinHttpOpenRequest": [
+          "winhttp:WinHttpOpenRequest",
+          "Creates an HTTP request handle"
+        ],
+        "WinHttpSendRequest": [
+          "winhttp:WinHttpSendRequest",
+          "Sends the specified request to the HTTP server"
+        ],
+        "WinHttpReceiveResponse": [
+          "winhttp:WinHttpReceiveResponse",
+          "Waits to receive the response to an HTTP request"
+        ],
+        "WinHttpReadData": [
+          "winhttp:WinHttpReadData",
+          "Reads data from a handle opened by the WinHttpOpenRequest function"
+        ]
+      },
+      "WinINet": {
+        "ALL": [
+          "InternetOpenW",
+          "InternetOpenA",
+          "InternetConnectW",
+          "InternetConnectA",
+          "InternetOpenUrlW",
+          "InternetOpenUrlA",
+          "HttpOpenRequestW",
+          "HttpOpenRequestA",
+          "HttpSendRequestW",
+          "HttpSendRequestA",
+          "InternetReadFile"
+        ],
+        "InternetOpenW": [
+          "wininet:InternetOpenW",
+          "Initializes an application's use of the WinINet functions (Unicode)"
+        ],
+        "InternetOpenA": [
+          "wininet:InternetOpenA",
+          "Initializes an application's use of the WinINet functions (ANSI)"
+        ],
+        "InternetConnectW": [
+          "wininet:InternetConnectW",
+          "Opens an FTP, HTTP, or Gopher session (Unicode)"
+        ],
+        "InternetConnectA": [
+          "wininet:InternetConnectA",
+          "Opens an FTP, HTTP, or Gopher session (ANSI)"
+        ],
+        "InternetOpenUrlW": [
+          "wininet:InternetOpenUrlW",
+          "Opens a resource specified by a URL (Unicode)"
+        ],
+        "InternetOpenUrlA": [
+          "wininet:InternetOpenUrlA",
+          "Opens a resource specified by a URL (ANSI)"
+        ],
+        "HttpOpenRequestW": [
+          "wininet:HttpOpenRequestW",
+          "Creates an HTTP request handle (Unicode)"
+        ],
+        "HttpOpenRequestA": [
+          "wininet:HttpOpenRequestA",
+          "Creates an HTTP request handle (ANSI)"
+        ],
+        "HttpSendRequestW": [
+          "wininet:HttpSendRequestW",
+          "Sends the specified request to the HTTP server (Unicode)"
+        ],
+        "HttpSendRequestA": [
+          "wininet:HttpSendRequestA",
+          "Sends the specified request to the HTTP server (ANSI)"
+        ],
+        "InternetReadFile": [
+          "wininet:InternetReadFile",
+          "Reads data from a handle opened by the InternetOpenUrl function"
+        ]
+      }
+    },
+    "DLL": {
+      "Basic": {
+        "ALL": [
+          "LoadLibraryA",
+          "LoadLibraryW",
+          "LoadLibraryExA",
+          "LoadLibraryExW",
+          "GetProcAddress",
+          "FreeLibrary"
+        ],
+        "LoadLibraryA": [
+          "kernel32:LoadLibraryA",
+          "Loads a DLL module (ANSI)"
+        ],
+        "LoadLibraryW": [
+          "kernel32:LoadLibraryW",
+          "Loads a DLL module (Unicode)"
+        ],
+        "LoadLibraryExA": [
+          "kernel32:LoadLibraryExA",
+          "Loads a DLL module with additional options (ANSI)"
+        ],
+        "LoadLibraryExW": [
+          "kernel32:LoadLibraryExW",
+          "Loads a DLL module with additional options (Unicode)"
+        ],
+        "GetProcAddress": [
+          "kernel32:GetProcAddress",
+          "Retrieves the address of an exported function from a DLL"
+        ],
+        "FreeLibrary": [
+          "kernel32:FreeLibrary",
+          "Frees the loaded DLL module"
+        ]
+      },
+      "LowLevel": {
+        "ALL": [
+          "LdrLoadDll",
+          "LdrGetProcedureAddress",
+          "LdrUnloadDll"
+        ],
+        "LdrLoadDll": [
+          "ntdll:LdrLoadDll",
+          "Low-level function to load a DLL"
+        ],
+        "LdrGetProcedureAddress": [
+          "ntdll:LdrGetProcedureAddress",
+          "Low-level function to get procedure address"
+        ],
+        "LdrUnloadDll": [
+          "ntdll:LdrUnloadDll",
+          "Low-level function to unload a DLL"
+        ]
+      }
+    },
+    "Process": {
+      "Manage": {
+        "ALL": [
+          "CreateProcessA",
+          "CreateProcessW",
+          "CreateProcessAsUserA",
+          "CreateProcessAsUserW",
+          "OpenProcess",
+          "TerminateProcess",
+          "ExitProcess",
+          "NtCreateProcess",
+          "NtOpenProcess",
+          "CreateProcessWithTokenW"
+        ],
+        "CreateProcessA": [
+          "kernel32:CreateProcessA",
+          "Creates a new process (ANSI)"
+        ],
+        "CreateProcessW": [
+          "kernel32:CreateProcessW",
+          "Creates a new process (Unicode)"
+        ],
+        "CreateProcessAsUserA": [
+          "kernel32:CreateProcessAsUserA",
+          "Creates a new process as a different user (ANSI)"
+        ],
+        "CreateProcessAsUserW": [
+          "kernel32:CreateProcessAsUserW",
+          "Creates a new process as a different user (Unicode)"
+        ],
+        "OpenProcess": [
+          "kernel32:OpenProcess",
+          "Opens an existing process object"
+        ],
+        "TerminateProcess": [
+          "kernel32:TerminateProcess",
+          "Terminates a process"
+        ],
+        "ExitProcess": [
+          "kernel32:ExitProcess",
+          "Ends the current process"
+        ],
+        "NtCreateProcess": [
+          "ntdll:NtCreateProcess",
+          "Low-level function to create a process"
+        ],
+        "NtOpenProcess": [
+          "ntdll:NtOpenProcess",
+          "Low-level function to open a process"
+        ],
+        "CreateProcessWithTokenW": [
+          "advapi32:CreateProcessWithTokenW",
+          "Creates a process with a token"
+        ]
+      },
+      "Info": {
+        "ALL": [
+          "GetProcessMemoryInfo",
+          "EmptyWorkingSet",
+          "QueryWorkingSet",
+          "QueryWorkingSetEx",
+          "GetWsChanges"
+        ],
+        "GetProcessMemoryInfo": [
+          "psapi:GetProcessMemoryInfo",
+          "Retrieves memory usage information for a process"
+        ],
+        "EmptyWorkingSet": [
+          "psapi:EmptyWorkingSet",
+          "Removes as many pages as possible from the working set"
+        ],
+        "QueryWorkingSet": [
+          "psapi:QueryWorkingSet",
+          "Returns information about the working set of pages in memory"
+        ],
+        "QueryWorkingSetEx": [
+          "psapi:QueryWorkingSetEx",
+          "Returns detailed information about the working set of pages in memory"
+        ],
+        "GetWsChanges": [
+          "psapi:GetWsChanges",
+          "Retrieves information about the pages that have changed in a process's working set"
+        ]
+      }
+    },
+    "Thread": {
+      "ALL": [
+        "CreateThread",
+        "CreateRemoteThread",
+        "SuspendThread",
+        "ResumeThread",
+        "TerminateThread",
+        "NtCreateThreadEx",
+        "RtlCreateUserThread"
+      ],
+      "CreateThread": [
+        "kernel32:CreateThread",
+        "Creates a thread to execute within the virtual address space"
+      ],
+      "CreateRemoteThread": [
+        "kernel32:CreateRemoteThread",
+        "Creates a thread in another process"
+      ],
+      "SuspendThread": [
+        "kernel32:SuspendThread",
+        "Suspends thread execution"
+      ],
+      "ResumeThread": [
+        "kernel32:ResumeThread",
+        "Resumes a suspended thread"
+      ],
+      "TerminateThread": [
+        "kernel32:TerminateThread",
+        "Terminates a thread"
+      ],
+      "NtCreateThreadEx": [
+        "ntdll:NtCreateThreadEx",
+        "Extended version for creating threads"
+      ],
+      "RtlCreateUserThread": [
+        "ntdll:RtlCreateUserThread",
+        "Creates a thread in the specified process"
+      ]
+    },
+    "Crypto": {
+      "ALL": [
+        "CryptAcquireContextW",
+        "CryptAcquireContextA",
+        "CryptCreateHash",
+        "CryptHashData",
+        "CryptEncrypt",
+        "CryptDecrypt",
+        "CryptGenRandom",
+        "BCryptEncrypt",
+        "BCryptDecrypt"
+      ],
+      "CryptAcquireContextW": [
+        "advapi32:CryptAcquireContextW",
+        "Acquires a cryptographic context (Unicode)"
+      ],
+      "CryptAcquireContextA": [
+        "advapi32:CryptAcquireContextA",
+        "Acquires a cryptographic context (ANSI)"
+      ],
+      "CryptCreateHash": [
+        "advapi32:CryptCreateHash",
+        "Creates a hash object"
+      ],
+      "CryptHashData": [
+        "advapi32:CryptHashData",
+        "Hashes data"
+      ],
+      "CryptEncrypt": [
+        "advapi32:CryptEncrypt",
+        "Encrypts data"
+      ],
+      "CryptDecrypt": [
+        "advapi32:CryptDecrypt",
+        "Decrypts data"
+      ],
+      "CryptGenRandom": [
+        "advapi32:CryptGenRandom",
+        "Generates random data"
+      ],
+      "BCryptEncrypt": [
+        "bcrypt:BCryptEncrypt",
+        "Performs an encryption operation"
+      ],
+      "BCryptDecrypt": [
+        "bcrypt:BCryptDecrypt",
+        "Performs a decryption operation"
+      ]
+    },
+  
+    "Dialog": {
+      "ALL": [
+        "MessageBox",
+        "MessageBoxA",
+        "MessageBoxW",
+        "MessageBoxExA",
+        "MessageBoxExW",
+        "MessageBoxIndirect",
+        "MessageBoxIndirectA",
+        "MessageBoxIndirectW",
+        "GetWindowTextA",
+        "GetWindowTextW",
+        "SetWindowTextA",
+        "GetDlgItemText",
+        "GetDlgItemTextA",
+        "GetDlgItemTextW",
+        "SetDlgItemTextA",
+        "GetDlgItemInt",
+        "SetDlgItemInt",
+        "SendMessage",
+        "SendDlgItemMessage",
+        "IsDialogMessageA",
+        "IsDialogMessageW",
+        "SendMessageA",
+        "DispatchMessageA",
+        "CallWindowProcA",
+        "DefWindowProcA",
+        "MessageBeep",
+        "DrawTextA",
+        "DrawTextExA",
+        "DrawTextExW",
+        "FindWindowA",
+        "GetClipboardData",
+        "CoInitialize",
+        "CoCreateInstance",
+        "LoadIconA",
+        "SetWindowLongA",
+        "ShowWindow",
+        "movewindow",
+        "UpdateWindow",
+        "CreateWindowExA",
+        "CreateWindow",
+        "DestroyWindow",
+        "DialogBox",
+        "EndDialog",
+        "DialogBoxParam",
+        "DialogBoxParamA",
+        "DialogBoxParamW",
+        "DialogBoxIndirect",
+        "DialogBoxIndirectParamA",
+        "DialogBoxIndirectParamW",
+        "CreateDialog",
+        "CreateDialogParam",
+        "CreateDialogParamA",
+        "CreateDialogIndirect",
+        "CreateDialogIndirectParam",
+        "CreateDialogIndirectParamA",
+        "TranslateMessage",
+        "GetMessageA",
+        "PeekMessageA"
+      ],
+      "MessageBox": {
+        "ALL": [
+          "MessageBox",
+          "MessageBoxA",
+          "MessageBoxW",
+          "MessageBoxExA",
+          "MessageBoxExW",
+          "MessageBoxIndirect",
+          "MessageBoxIndirectA",
+          "MessageBoxIndirectW"
+        ],
+        "MessageBox": [
+          "user32:MessageBox",
+          "message window"
+        ],
+        "MessageBoxA": [
+          "user32:MessageBoxA",
+          "message window (ANSI)"
+        ],
+        "MessageBoxW": [
+          "user32:MessageBoxW",
+          "message window (Unicode)"
+        ],
+        "MessageBoxExA": [
+          "user32:MessageBoxExA",
+          "message window with extended options (ANSI)"
+        ],
+        "MessageBoxExW": [
+          "user32:MessageBoxExW",
+          "message window with extended options (Unicode)"
+        ],
+        "MessageBoxIndirect": [
+          "user32:MessageBoxIndirect",
+          "Message Box"
+        ],
+        "MessageBoxIndirectA": [
+          "user32:MessageBoxIndirectA",
+          "Message Box (ANSI)"
+        ],
+        "MessageBoxIndirectW": [
+          "user32:MessageBoxIndirectW",
+          "Message Box (Unicode)"
+        ]
+      },
+      "WindowManagement": {
+        "ALL": [
+          "GetWindowTextA",
+          "GetWindowTextW",
+          "SetWindowTextA",
+          "GetDlgItemText",
+          "GetDlgItemTextA",
+          "GetDlgItemTextW",
+          "SetDlgItemTextA",
+          "GetDlgItemInt",
+          "SetDlgItemInt",
+          "FindWindowA",
+          "LoadIconA",
+          "SetWindowLongA",
+          "ShowWindow",
+          "movewindow",
+          "UpdateWindow",
+          "CreateWindowExA",
+          "CreateWindow",
+          "DestroyWindow"
+        ],
+        "GetWindowTextA": [
+          "user32:GetWindowTextA",
+          "get control text (ANSI)"
+        ],
+        "GetWindowTextW": [
+          "user32:GetWindowTextW",
+          "get control text (Unicode)"
+        ],
+        "SetWindowTextA": [
+          "user32:SetWindowTextA",
+          "set control title (ANSI)"
+        ],
+        "GetDlgItemText": [
+          "user32:GetDlgItemText",
+          "get control text"
+        ],
+        "GetDlgItemTextA": [
+          "user32:GetDlgItemTextA",
+          "get control text (ANSI)"
+        ],
+        "GetDlgItemTextW": [
+          "user32:GetDlgItemTextW",
+          "get control text (Unicode)"
+        ],
+        "SetDlgItemTextA": [
+          "user32:SetDlgItemTextA",
+          "set control text (ANSI)"
+        ],
+        "GetDlgItemInt": [
+          "user32:GetDlgItemInt",
+          "Get the integer in the control"
+        ],
+        "SetDlgItemInt": [
+          "user32:SetDlgItemInt",
+          "Set the text in the control"
+        ],
+        "FindWindowA": [
+          "user32:FindWindowA",
+          "get window handle (ANSI)"
+        ],
+        "LoadIconA": [
+          "user32:LoadIconA",
+          "Load icon resource (ANSI)"
+        ],
+        "SetWindowLongA": [
+          "user32:SetWindowLongA",
+          "set window properties (ANSI)"
+        ],
+        "ShowWindow": [
+          "user32:ShowWindow",
+          "set window display status"
+        ],
+        "movewindow": [
+          "user32:movewindow",
+          "set window position and size"
+        ],
+        "UpdateWindow": [
+          "user32:UpdateWindow",
+          "update window"
+        ],
+        "CreateWindowExA": [
+          "user32:CreateWindowExA",
+          "build window (ANSI)"
+        ],
+        "CreateWindow": [
+          "user32:CreateWindow",
+          "build window"
+        ],
+        "DestroyWindow": [
+          "user32:DestroyWindow",
+          "destroy window"
+        ]
+      },
+      "DialogBox": {
+        "ALL": [
+          "DialogBox",
+          "EndDialog",
+          "DialogBoxParam",
+          "DialogBoxParamA",
+          "DialogBoxParamW",
+          "DialogBoxIndirect",
+          "DialogBoxIndirectParamA",
+          "DialogBoxIndirectParamW",
+          "CreateDialog",
+          "CreateDialogParam",
+          "CreateDialogParamA",
+          "CreateDialogIndirect",
+          "CreateDialogIndirectParam",
+          "CreateDialogIndirectParamA"
+        ],
+        "DialogBox": [
+          "user32:DialogBox",
+          "modal dialog"
+        ],
+        "EndDialog": [
+          "user32:EndDialog",
+          "clear modal dialog"
+        ],
+        "DialogBoxParam": [
+          "user32:DialogBoxParam",
+          "modal dialog"
+        ],
+        "DialogBoxParamA": [
+          "user32:DialogBoxParamA",
+          "modal dialog (ANSI)"
+        ],
+        "DialogBoxParamW": [
+          "user32:DialogBoxParamW",
+          "modal dialog (Unicode)"
+        ],
+        "DialogBoxIndirect": [
+          "user32:DialogBoxIndirect",
+          "modeling box"
+        ],
+        "DialogBoxIndirectParamA": [
+          "user32:DialogBoxIndirectParamA",
+          "formwork (ANSI)"
+        ],
+        "DialogBoxIndirectParamW": [
+          "user32:DialogBoxIndirectParamW",
+          "formwork (Unicode)"
+        ],
+        "CreateDialog": [
+          "user32:CreateDialog",
+          "Modeless dialog"
+        ],
+        "CreateDialogParam": [
+          "user32:CreateDialogParam",
+          "Modeless dialog"
+        ],
+        "CreateDialogParamA": [
+          "user32:CreateDialogParamA",
+          "Modeless dialog (ANSI)"
+        ],
+        "CreateDialogIndirect": [
+          "user32:CreateDialogIndirect",
+          "Modeless dialog"
+        ],
+        "CreateDialogIndirectParam": [
+          "user32:CreateDialogIndirectParam",
+          "Unframed"
+        ],
+        "CreateDialogIndirectParamA": [
+          "user32:CreateDialogIndirectParamA",
+          "Unframed (ANSI)"
+        ]
+      },
+      "MessageHandling": {
+        "ALL": [
+          "SendMessage",
+          "SendDlgItemMessage",
+          "IsDialogMessageA",
+          "IsDialogMessageW",
+          "SendMessageA",
+          "DispatchMessageA",
+          "CallWindowProcA",
+          "DefWindowProcA",
+          "TranslateMessage",
+          "GetMessageA",
+          "PeekMessageA"
+        ],
+        "SendMessage": [
+          "user32:SendMessage",
+          "message sending"
+        ],
+        "SendDlgItemMessage": [
+          "user32:SendDlgItemMessage",
+          "message sending"
+        ],
+        "IsDialogMessageA": [
+          "user32:IsDialogMessageA",
+          "send a message (ANSI)"
+        ],
+        "IsDialogMessageW": [
+          "user32:IsDialogMessageW",
+          "send a message (Unicode)"
+        ],
+        "SendMessageA": [
+          "user32:SendMessageA",
+          "send a message (ANSI)"
+        ],
+        "DispatchMessageA": [
+          "user32:DispatchMessageA",
+          "send a message (ANSI)"
+        ],
+        "CallWindowProcA": [
+          "user32:CallWindowProcA",
+          "send a message (ANSI)"
+        ],
+        "DefWindowProcA": [
+          "user32:DefWindowProcA",
+          "Messages are handled by default (ANSI)"
+        ],
+        "TranslateMessage": [
+          "user32:TranslateMessage",
+          "message queue"
+        ],
+        "GetMessageA": [
+          "user32:GetMessageA",
+          "get message to structure (ANSI)"
+        ],
+        "PeekMessageA": [
+          "user32:PeekMessageA",
+          "Check message to structure (ANSI)"
+        ]
+      },
+      "Other": {
+        "ALL": [
+          "MessageBeep",
+          "DrawTextA",
+          "DrawTextExA",
+          "DrawTextExW",
+          "GetClipboardData",
+          "CoInitialize",
+          "CoCreateInstance"
+        ],
+        "MessageBeep": [
+          "user32:MessageBeep",
+          "system warning sound"
+        ],
+        "DrawTextA": [
+          "user32:DrawTextA",
+          "Text drawn into rectangle (ANSI)"
+        ],
+        "DrawTextExA": [
+          "user32:DrawTextExA",
+          "Extended text drawing (ANSI)"
+        ],
+        "DrawTextExW": [
+          "user32:DrawTextExW",
+          "Extended text drawing (Unicode)"
+        ],
+        "GetClipboardData": [
+          "user32:GetClipboardData",
+          "get clipboard data"
+        ],
+        "CoInitialize": [
+          "ole32:CoInitialize",
+          "Initialize the COM library"
+        ],
+        "CoCreateInstance": [
+          "ole32:CoCreateInstance",
+          "Build COM object"
+        ]
+      }
+    },
+    "TimeProcessing": {
+      "ALL": [
+        "SetSystemTime",
+        "TimerProc",
+        "SetLocalTime",
+        "GetSystemTime",
+        "GetLocalTime",
+        "GetCurrentTime",
+        "GetFileTime",
+        "GetTickCount",
+        "CompareFileTime",
+        "SetTimer",
+        "KillTimer",
+        "timeSetEvent"
+      ],
+      "SetSystemTime": [
+        "kernel32:SetSystemTime",
+        "set system time"
+      ],
+      "TimerProc": [
+        "kernel32:TimerProc",
+        "Callback"
+      ],
+      "SetLocalTime": [
+        "kernel32:SetLocalTime",
+        "set local time"
+      ],
+      "GetSystemTime": [
+        "kernel32:GetSystemTime",
+        "Load system time"
+      ],
+      "GetLocalTime": [
+        "kernel32:GetLocalTime",
+        "get local time"
+      ],
+      "GetCurrentTime": [
+        "kernel32:GetCurrentTime",
+        "Get system time"
+      ],
+      "GetFileTime": [
+        "kernel32:GetFileTime",
+        "get file time"
+      ],
+      "GetTickCount": [
+        "kernel32:GetTickCount",
+        "The number of milliseconds elapsed since the system started"
+      ],
+      "CompareFileTime": [
+        "kernel32:CompareFileTime",
+        "Compare file times"
+      ],
+      "SetTimer": [
+        "user32:SetTimer",
+        "Create a timer"
+      ],
+      "KillTimer": [
+        "user32:KillTimer",
+        "remove timer"
+      ],
+      "timeSetEvent": [
+        "winmm:timeSetEvent",
+        "multimedia timer"
+      ]
+    },
+    "Clipboard": {
+      "ALL": [
+        "GetClipboardData",
+        "SetClipboardData",
+        "OpenClipboard",
+        "CloseClipboard"
+      ],
+      "GetClipboardData": [
+        "user32:GetClipboardData",
+        "Retrieves data from the clipboard"
+      ],
+      "SetClipboardData": [
+        "user32:SetClipboardData",
+        "Places data on the clipboard"
+      ],
+      "OpenClipboard": [
+        "user32:OpenClipboard",
+        "Opens the clipboard"
+      ],
+      "CloseClipboard": [
+        "user32:CloseClipboard",
+        "Closes the clipboard"
+      ]
+    },
+    "Keyboard": {
+      "ALL": [
+        "SetWindowsHookExA",
+        "SetWindowsHookExW",
+        "GetAsyncKeyState",
+        "GetKeyState",
+        "GetKeyboardState"
+      ],
+      "SetWindowsHookExA": [
+        "user32:SetWindowsHookExA",
+        "Installs an application-defined hook procedure (ANSI)"
+      ],
+      "SetWindowsHookExW": [
+        "user32:SetWindowsHookExW",
+        "Installs an application-defined hook procedure (Unicode)"
+      ],
+      "GetAsyncKeyState": [
+        "user32:GetAsyncKeyState",
+        "Determines if a key is up or down"
+      ],
+      "GetKeyState": [
+        "user32:GetKeyState",
+        "Retrieves the status of the specified virtual key"
+      ],
+      "GetKeyboardState": [
+        "user32:GetKeyboardState",
+        "Copies the status of the 256 virtual keys to the specified buffer"
+      ]
+    },
+    "Debug": {
+      "Basic": {
+        "ALL": [
+          "IsDebuggerPresent",
+          "CheckRemoteDebuggerPresent",
+          "OutputDebugStringA",
+          "OutputDebugStringW"
+        ],
+        "IsDebuggerPresent": [
+          "kernel32:IsDebuggerPresent",
+          "Determines if the process is being debugged"
+        ],
+        "CheckRemoteDebuggerPresent": [
+          "kernel32:CheckRemoteDebuggerPresent",
+          "Checks if a process is being debugged"
+        ],
+        "OutputDebugStringA": [
+          "kernel32:OutputDebugStringA",
+          "Sends a string to the debugger (ANSI)"
+        ],
+        "OutputDebugStringW": [
+          "kernel32:OutputDebugStringW",
+          "Sends a string to the debugger (Unicode)"
+        ]
+      },
+      "Advanced": {
+        "ALL": [
+          "NtQueryInformationProcess"
+        ],
+        "NtQueryInformationProcess": [
+          "ntdll:NtQueryInformationProcess",
+          "Retrieves process information (used for anti-debugging)"
+        ]
+      }
+    },
+    "System": {
+      "Information": {
+        "ALL": [
+          "GetSystemInfo",
+          "GetComputerNameA",
+          "GetComputerNameW",
+          "GetTickCount",
+          "GetTickCount64"
+        ],
+        "GetSystemInfo": [
+          "kernel32:GetSystemInfo",
+          "Retrieves information about the system"
+        ],
+        "GetComputerNameA": [
+          "kernel32:GetComputerNameA",
+          "Retrieves the computer name (ANSI)"
+        ],
+        "GetComputerNameW": [
+          "kernel32:GetComputerNameW",
+          "Retrieves the computer name (Unicode)"
+        ],
+        "GetTickCount": [
+          "kernel32:GetTickCount",
+          "Retrieves the ms elapsed since system start"
+        ],
+        "GetTickCount64": [
+          "kernel32:GetTickCount64",
+          "Retrieves the ms elapsed since system start (64-bit)"
+        ]
+      },
+      "Control": {
+        "ALL": [
+          "Sleep",
+          "QueryPerformanceCounter"
+        ],
+        "Sleep": [
+          "kernel32:Sleep",
+          "Suspends thread execution for an interval"
+        ],
+        "QueryPerformanceCounter": [
+          "kernel32:QueryPerformanceCounter",
+          "Retrieves high-resolution timer value"
+        ]
+      }
+    },
+    "NTDLL": {
+      "MemoryManagement": {
+        "ALL": [
+          "NtAllocateVirtualMemory",
+          "NtFreeVirtualMemory",
+          "NtProtectVirtualMemory",
+          "NtMapViewOfSection",
+          "NtUnmapViewOfSection",
+          "NtCreateSection",
+          "NtExtendSection"
+        ],
+        "NtAllocateVirtualMemory": [
+          "ntdll:NtAllocateVirtualMemory",
+          "System service to allocate virtual memory"
+        ],
+        "NtFreeVirtualMemory": [
+          "ntdll:NtFreeVirtualMemory",
+          "System service to free virtual memory"
+        ],
+        "NtProtectVirtualMemory": [
+          "ntdll:NtProtectVirtualMemory",
+          "System service to change memory protection"
+        ],
+        "NtMapViewOfSection": [
+          "ntdll:NtMapViewOfSection",
+          "Maps a view of a section into the virtual address space"
+        ],
+        "NtUnmapViewOfSection": [
+          "ntdll:NtUnmapViewOfSection",
+          "Unmaps a view of a section from the virtual address space"
+        ],
+        "NtCreateSection": [
+          "ntdll:NtCreateSection",
+          "Creates a section object"
+        ],
+        "NtExtendSection": [
+          "ntdll:NtExtendSection",
+          "Extends a section object"
+        ]
+      },
+      "HeapManagement": {
+        "ALL": [
+          "RtlAllocateHeap",
+          "RtlFreeHeap",
+          "RtlReAllocateHeap",
+          "RtlSizeHeap",
+          "RtlZeroMemory",
+          "RtlMoveMemory",
+          "RtlCopyMemory",
+          "RtlCompareMemory",
+          "RtlFillMemory"
+        ],
+        "RtlAllocateHeap": [
+          "ntdll:RtlAllocateHeap",
+          "Allocates a block of memory from a heap"
+        ],
+        "RtlFreeHeap": [
+          "ntdll:RtlFreeHeap",
+          "Frees a block of memory allocated by RtlAllocateHeap"
+        ],
+        "RtlReAllocateHeap": [
+          "ntdll:RtlReAllocateHeap",
+          "Reallocates a block of memory from a heap"
+        ],
+        "RtlSizeHeap": [
+          "ntdll:RtlSizeHeap",
+          "Returns the size of a memory block allocated from a heap"
+        ],
+        "RtlZeroMemory": [
+          "ntdll:RtlZeroMemory",
+          "Fills a block of memory with zeros"
+        ],
+        "RtlMoveMemory": [
+          "ntdll:RtlMoveMemory",
+          "Moves memory from one location to another"
+        ],
+        "RtlCopyMemory": [
+          "ntdll:RtlCopyMemory",
+          "Copies memory from one location to another"
+        ],
+        "RtlCompareMemory": [
+          "ntdll:RtlCompareMemory",
+          "Compares blocks of memory"
+        ],
+        "RtlFillMemory": [
+          "ntdll:RtlFillMemory",
+          "Fills a block of memory with a specified value"
+        ]
+      }
+    },
+    "COM": {
+      "Initialization": {
+        "ALL": [
+          "CoInitialize",
+          "CoUninitialize",
+          "CoInitializeEx"
+        ],
+        "CoInitialize": [
+          "ole32:CoInitialize",
+          "Initializes the COM library"
+        ],
+        "CoUninitialize": [
+          "ole32:CoUninitialize",
+          "Uninitializes the COM library"
+        ],
+        "CoInitializeEx": [
+          "ole32:CoInitializeEx",
+          "Initializes the COM library with concurrency model"
+        ]
+      },
+      "ObjectCreation": {
+        "ALL": [
+          "CoCreateInstance",
+          "CoGetObject"
+        ],
+        "CoCreateInstance": [
+          "ole32:CoCreateInstance",
+          "Creates a single uninitialized COM object"
+        ],
+        "CoGetObject": [
+          "ole32:CoGetObject",
+          "Creates a new object through a programmatic identifier"
+        ]
+      },
+      "MemoryManagement": {
+        "ALL": [
+          "CoTaskMemAlloc",
+          "CoTaskMemFree",
+          "CoTaskMemRealloc",
+          "CoGetMalloc"
+        ],
+        "CoTaskMemAlloc": [
+          "ole32:CoTaskMemAlloc",
+          "Allocates a block of task memory"
+        ],
+        "CoTaskMemFree": [
+          "ole32:CoTaskMemFree",
+          "Frees a block of task memory"
+        ],
+        "CoTaskMemRealloc": [
+          "ole32:CoTaskMemRealloc",
+          "Reallocates a block of task memory"
+        ],
+        "CoGetMalloc": [
+          "ole32:CoGetMalloc",
+          "Retrieves a pointer to the default IMalloc interface"
+        ]
+      }
+    }
+  }
