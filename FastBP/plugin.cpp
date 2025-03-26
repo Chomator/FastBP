@@ -108,12 +108,12 @@ static bool LoadApis(const wchar_t* apiFile)
     }
     catch (const json::parse_error& e)
     {
-        _plugin_logputs("Json parsing ERROR!!!");
+        _plugin_logputs("[" PLUGIN_NAME "] Json parsing ERROR!!!");
         return false;
     }
     catch (const std::exception& e)
     {
-        _plugin_logputs("Json Loading ERROR!!!");
+        _plugin_logputs("[" PLUGIN_NAME "] Json Loading ERROR!!!");
         return false;
     }
     catch (...)
@@ -329,7 +329,6 @@ static void SetMultipleBreakpoints(const std::vector<size_t>& apiIndices, bool s
 bool ReloadConfig()
 {
     bool ret = true;
-    auto oldMenu = hMenu;
 
     // Clear the menu
     if (!_plugin_menuclear(hMenu))
@@ -345,7 +344,8 @@ bool ReloadConfig()
     if (!LoadApis(apiFile))
     {
         _plugin_logprintf("[" PLUGIN_NAME "] Failed to reload API file!\n");
-        hMenu = oldMenu;
+        _plugin_menuaddentry(hMenu, MENU_RELOAD, "Reload Config");
+        _plugin_menuaddentry(hMenu, MENU_ABOUT, "About");
         ret = false;
     }
     else
@@ -354,11 +354,11 @@ bool ReloadConfig()
         if (!SetupMenus())
         {
             _plugin_logputs("[" PLUGIN_NAME "] Menu setup failed after reload...");
-            hMenu = oldMenu;
+            _plugin_menuaddentry(hMenu, MENU_RELOAD, "Reload Config");
+            _plugin_menuaddentry(hMenu, MENU_ABOUT, "About");
             ret = false;
         }
         else {
-            MessageBox(NULL, TEXT("Json parsing ERROR!"), TEXT("FastBP"), MB_ICONERROR | MB_OK);
             _plugin_menuaddentry(hMenu, MENU_RELOAD, "Reload Config");
             _plugin_menuaddentry(hMenu, MENU_ABOUT, "About");
         }
