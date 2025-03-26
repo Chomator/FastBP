@@ -89,12 +89,17 @@ The example **apis.xlsx** file looked like this, and the **Extensions** tag is o
 
 1. **Download the Plugin**:
    - Get the latest release from the [Releases](https://github.com/Chomator/FastBP/releases) page.
-2. **Install the Plugin**:
-   - Place the downloaded plugin file in the `plugins` directory of your x32/x64dbg installation:
+2. **Generate JSON:**
+   - Edit example.xlsx, add your APIs.
+   - Generate JSON file with xlsx2json.py.
+   - Rename the JSON file as `FastBP.json`
+3. **Install the Plugin**:
+   - Place the JSON file and dp32/dp64, in the `plugins` directory of your x32/x64dbg installation:
      - For 32-bit: `x32dbg/plugins/`
      - For 64-bit: `x64dbg/plugins/`
-3. **Restart x32/x64dbg**:
-   - Launch the debugger, and the plugin will be automatically loaded.
+
+4. **Restart x32/x64dbg**:
+	- Launch the debugger, and the plugin will be automatically loaded.
 
 ### Setting Breakpoints
 
