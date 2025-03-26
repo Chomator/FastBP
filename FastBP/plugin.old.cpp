@@ -1,4 +1,4 @@
-﻿//Original idea by https://github.com/x64dbg/SlothBP
+//Original idea by https://github.com/x64dbg/SlothBP
 
 #include "plugin.h"
 #include "resource.h"
@@ -31,6 +31,7 @@ static void ParseJsonNode(const json& node, const std::string& currentCategory, 
             // Store the ALL tag information
             AllTagInfo allInfo;
             allInfo.category = currentCategory;
+
             // Get the list of APIs this ALL tag controls
             for (const auto& item : *allIt)
             {
@@ -39,6 +40,7 @@ static void ParseJsonNode(const json& node, const std::string& currentCategory, 
                     allInfo.apiNames.push_back(item.get<std::string>());
                 }
             }
+
             if (!allInfo.apiNames.empty())
             {
                 allTags.push_back(allInfo);
@@ -49,7 +51,6 @@ static void ParseJsonNode(const json& node, const std::string& currentCategory, 
         for (auto it = node.begin(); it != node.end(); ++it)
         {
             const std::string& key = it.key();
-
             if (key == "ALL")
                 continue; // Skip ALL keys in normal processing
 
@@ -63,21 +64,16 @@ static void ParseJsonNode(const json& node, const std::string& currentCategory, 
                 // This is a category node, recurse deeper
                 ParseJsonNode(value, newCategory, apiList);
             }
-            else if (key == "Apis" && value.is_array())
+            else if (value.is_array() && value.size() >= 2)
             {
-                // This is a leaf node with API definitions
-                for (const auto& apiDef : value)
-                {
-                    if (apiDef.is_object())
-                    {
-                        API api;
-                        api.bpName = apiDef.value("Name", "");                       // Menu display name
-                        api.apiName = apiDef.value("DllFunction", "");               // API to evaluate
-                        api.description = apiDef.value("Description", "");           // Description
-                        api.category = currentCategory;                              // Category for grouping
-                        apiList.push_back(api);
-                    }
-                }
+                // This is a leaf node with an API definition
+                API api;
+                api.bpName = key;                       // Menu display name
+                api.apiName = value[0].get<std::string>(); // API to evaluate
+                api.description = value[1].get<std::string>(); // Description
+                api.category = currentCategory;          // Category for grouping
+
+                apiList.push_back(api);
             }
         }
     }
@@ -86,11 +82,9 @@ static void ParseJsonNode(const json& node, const std::string& currentCategory, 
 static bool LoadApis(const wchar_t* apiFile)
 {
     apis.clear();
-    allTags.clear();
-
     try
     {
-        // Convert wide character path to narrow character path
+        // Convert wide string to narrow string for fstream
         std::wstring wideFilePath(apiFile);
         std::string filePath(wideFilePath.begin(), wideFilePath.end());
 
@@ -106,25 +100,20 @@ static bool LoadApis(const wchar_t* apiFile)
         json apiJson;
         jsonFile >> apiJson;
 
-        // Get the first (or only) top-level key as the root
-        std::string rootName = apiJson.begin().key();
-        const json& rootNode = apiJson[rootName];
-
-        // Recursively parse, with the initial category path set to rootName (e.g., "apis")
-        ParseJsonNode(rootNode, rootName, apis);
-
+        // Process the JSON recursively starting from the root
+        ParseJsonNode(apiJson, "", apis);
         _plugin_logprintf("[" PLUGIN_NAME "] Loaded %d APIs!\n", int(apis.size()));
+
         return true;
     }
-
     catch (const json::parse_error& e)
     {
-        _plugin_logprintf("[" PLUGIN_NAME "] Json parsing ERROR: %s\n", e.what());
+        _plugin_logputs("[" PLUGIN_NAME "] Json parsing ERROR!!!");
         return false;
     }
     catch (const std::exception& e)
     {
-        _plugin_logprintf("[" PLUGIN_NAME "] Json Loading ERROR: %s\n", e.what());
+        _plugin_logputs("[" PLUGIN_NAME "] Json Loading ERROR!!!");
         return false;
     }
     catch (...)
@@ -133,6 +122,8 @@ static bool LoadApis(const wchar_t* apiFile)
         return false;
     }
 }
+
+
 static bool SetupMenus()
 {
     if (apis.empty())
@@ -152,7 +143,6 @@ static bool SetupMenus()
 
         // Split the category path and create menu hierarchy
         std::vector<std::string> categoryParts = split(categoryPath, '/');
-
         for (size_t j = 0; j < categoryParts.size(); j++)
         {
             if (currentPath.empty())
@@ -281,7 +271,6 @@ static std::vector<size_t> FindApisByName(const std::vector<std::string>& apiNam
     return result;
 }
 
-
 // Helper function to set or clear breakpoints for multiple APIs
 static void SetMultipleBreakpoints(const std::vector<size_t>& apiIndices, bool setBreakpoints)
 {
@@ -291,56 +280,47 @@ static void SetMultipleBreakpoints(const std::vector<size_t>& apiIndices, bool s
             continue;
 
         auto& api = apis[index];
+
         if (DbgIsDebugging())
         {
-            // Evaluate the API address
             auto addr = Eval(api.apiName.c_str());
-            if (!addr)
+            if (addr)
             {
-                _plugin_logprintf("[" PLUGIN_NAME "] Failed to resolve address for %s (%s)...\n",
-                    api.bpName.c_str(), api.apiName.c_str());
-                continue;
-            }
+                auto bpType = DbgGetBpxTypeAt(addr);
+                char cmd[256] = "";
+                bool changed = false;
 
-            // Get the current breakpoint type at the address
-            auto bpType = DbgGetBpxTypeAt(addr);
-            char cmd[256] = "";
-            bool changed = false;
-
-            // Set or clear the breakpoint based on the flag
-            if (setBreakpoints && !(bpType & bp_normal))
-            {
-                sprintf_s(cmd, "bp %p", addr);
-                if (DbgCmdExecDirect(cmd))
+                if (setBreakpoints && !(bpType & bp_normal))
                 {
-                    api.enabled = true;
-                    changed = true;
+                    sprintf_s(cmd, "bp %p", addr);
+                    if (DbgCmdExecDirect(cmd))
+                    {
+                        api.enabled = true;
+                        changed = true;
+                    }
+                }
+                else if (!setBreakpoints && (bpType & bp_normal))
+                {
+                    sprintf_s(cmd, "bc %p", addr);
+                    if (DbgCmdExecDirect(cmd))
+                    {
+                        api.enabled = false;
+                        changed = true;
+                    }
+                }
 
+                if (changed)
+                {
+                    // Update menu check state
+                    _plugin_menuentrysetchecked(pluginHandle, int(index), api.enabled);
+
+                    // Log the change
+                    _plugin_logprintf("[" PLUGIN_NAME "] %s breakpoint %s: %s\n",
+                        setBreakpoints ? "Set" : "Cleared",
+                        api.bpName.c_str(),
+                        api.description.c_str());
                 }
             }
-            else if (!setBreakpoints && (bpType & bp_normal))
-            {
-                sprintf_s(cmd, "bc %p", addr);
-                if (DbgCmdExecDirect(cmd))
-                {
-                    api.enabled = false;
-                    changed = true;
-                }
-            }
-
-            // Update menu check state and log the change if necessary
-            if (changed)
-            {
-                _plugin_menuentrysetchecked(pluginHandle, int(index), api.enabled);
-                _plugin_logprintf("[" PLUGIN_NAME "] %s breakpoint %s: %s\n",
-                    setBreakpoints ? "Set" : "Cleared",
-                    api.bpName.c_str(),
-                    api.description.c_str());
-            }
-        }
-        else
-        {
-            _plugin_logputs("[" PLUGIN_NAME "] Not debugging...");
         }
     }
 }
@@ -357,8 +337,7 @@ bool ReloadConfig()
         return false;
     }
 
-    // Clear all data
-    apis.clear();
+    // Clear allTags
     allTags.clear();
 
     // Load the API file
@@ -409,29 +388,24 @@ static void refreshStatus(CBTYPE type, const char* modulename)
         return;
     }
 
-    // Iterate through all APIs to refresh their breakpoint status
     for (size_t i = 0; i < apis.size(); ++i)
     {
-        auto& api = apis[i];
-        auto addr = Eval(api.apiName.c_str()); // Evaluate the address of the API
-
-        // Check if the debugger is running
-        if (!DbgIsDebugging())
+        //determine if we care about this module.
+        auto modnameList = split(apis[i].apiName, ':');
+        auto modname = modnameList.at(0);
+        if (strstr(modulename, modname.c_str()) == NULL)
         {
-            // If not debugging, force reset the enabled state to false
-            api.enabled = false;
-            _plugin_menuentrysetchecked(pluginHandle, int(i), api.enabled);
-            continue; // Skip further processing for this API
+            //skip this module, we don't need to incur cycles to resolve it
+            continue;
         }
-
-        // Get the current breakpoint type at the address
-        bool oldEnabled = api.enabled; // Store the previous state
-        api.enabled = addr ? (DbgGetBpxTypeAt(addr) & bp_normal) != 0 : false;
-
-        // Update the GUI only if the state has changed
-        if (api.enabled != oldEnabled)
+        else
         {
-            _plugin_menuentrysetchecked(pluginHandle, int(i), api.enabled);
+            auto& api = apis[i];
+            auto addr = Eval(api.apiName.c_str());
+            auto oldenabled = api.enabled;
+            api.enabled = addr ? (DbgGetBpxTypeAt(addr) & bp_normal) != 0 : false;
+            if (api.enabled != oldenabled) //only waste GUI time if an update is needed
+                _plugin_menuentrysetchecked(pluginHandle, int(i), api.enabled);
         }
     }
 }
@@ -460,66 +434,49 @@ PLUG_EXPORT void CBMENUENTRY(CBTYPE cbType, PLUG_CB_MENUENTRY* info)
         if (DbgIsDebugging())
         {
             auto addr = Eval(api.apiName.c_str());
-            if (!addr)
+            if (addr)
             {
-                _plugin_logprintf("[" PLUGIN_NAME "] Failed to resolve api %s (%s)...\n",
-                    api.bpName.c_str(), api.apiName.c_str());
-                return;
-            }
-
-            auto bpType = DbgGetBpxTypeAt(addr);
-            char cmd[256] = "";
-            bool changed = false;
-
-            if (api.enabled) // Already enabled -> try to disable
-            {
-                if (bpType & bp_normal) // Enabled in the debugger -> try to disable
+                auto bpType = DbgGetBpxTypeAt(addr);
+                char cmd[256] = "";
+                if (api.enabled) //already enabled -> try to disable
                 {
-                    sprintf_s(cmd, "bc %p", addr);
-                    if (DbgCmdExecDirect(cmd))
+                    if (bpType & bp_normal) //enabled in the debuggee -> try to disable
                     {
+                        sprintf_s(cmd, "bc %p", addr);
+                        if (DbgCmdExecDirect(cmd))
+                            api.enabled = false;
+                    }
+                    else //already disabled in the debuggee -> nothing to do
+                    {
+                        _plugin_logputs("Breakpoint already disabled...");
                         api.enabled = false;
-                        changed = true;
                     }
                 }
-                else // Already disabled in the debugger -> nothing to do
+                else //not yet enabled -> try to enable
                 {
-                    _plugin_logputs("Breakpoint already disabled...");
-                    api.enabled = false;
-                }
-            }
-            else // Not yet enabled -> try to enable
-            {
-                if (bpType & bp_normal) // Already enabled in the debugger -> nothing to do
-                {
-                    _plugin_logputs("Breakpoint already enabled...");
-                    api.enabled = true;
-                }
-                else
-                {
-                    sprintf_s(cmd, "bp %p", addr);
-                    if (DbgCmdExecDirect(cmd))
+                    if (bpType & bp_normal) //already enabled in debuggee -> nothing to do
                     {
+                        _plugin_logputs("Breakpoint already enabled...");
                         api.enabled = true;
-                        changed = true;
+                    }
+                    else
+                    {
+                        sprintf_s(cmd, "bp %p", addr);
+                        if (DbgCmdExecDirect(cmd))
+                            api.enabled = true;
                     }
                 }
-            }
 
-            // Display description information (only when enabling breakpoints)
-            if (changed && api.enabled && !api.description.empty())
-            {
-                _plugin_logprintf("[" PLUGIN_NAME "] %s: %s\n", api.bpName.c_str(), api.description.c_str());
+                // Show description in log when enabling
+                if (api.enabled && !api.description.empty())
+                    _plugin_logprintf("[" PLUGIN_NAME "] %s: %s\n", api.bpName.c_str(), api.description.c_str());
             }
-
-            // Update the checked state of the menu item
-            _plugin_menuentrysetchecked(pluginHandle, info->hEntry, api.enabled);
+            else
+                _plugin_logprintf("[" PLUGIN_NAME "] Failed to resolve api %s (%s)...\n", api.bpName.c_str(), api.apiName.c_str());
         }
         else
-        {
             _plugin_logputs("[" PLUGIN_NAME "] Not debugging...");
-            _plugin_menuentrysetchecked(pluginHandle, info->hEntry, api.enabled);
-        }
+        _plugin_menuentrysetchecked(pluginHandle, info->hEntry, api.enabled);
     }
     // Check if this is a Set All menu entry
     else if (info->hEntry >= MENU_SET_ALL_BASE && info->hEntry < MENU_SET_ALL_BASE + int(allTags.size()))
@@ -532,10 +489,8 @@ PLUG_EXPORT void CBMENUENTRY(CBTYPE cbType, PLUG_CB_MENUENTRY* info)
 
             if (!apiIndices.empty())
             {
-                if (DbgIsDebugging()) {
-                    _plugin_logprintf("[" PLUGIN_NAME "] Setting all breakpoints for %s...\n", allInfo.category.c_str());
-                    SetMultipleBreakpoints(apiIndices, true);
-                }
+                _plugin_logprintf("[" PLUGIN_NAME "] Setting all breakpoints for %s...\n", allInfo.category.c_str());
+                SetMultipleBreakpoints(apiIndices, true);
             }
             else
             {
@@ -563,14 +518,15 @@ PLUG_EXPORT void CBMENUENTRY(CBTYPE cbType, PLUG_CB_MENUENTRY* info)
             }
         }
     }
-    // Check if this is a Clear All Breakpoints menu entry
+
+    // Check if this is a Clear All
     else if (info->hEntry == MENU_CLEAR_ALL)
     {
         if (DbgIsDebugging())
         {
             _plugin_logprintf("[" PLUGIN_NAME "] Clearing all breakpoints...\n");
 
-            // Clear breakpoints for all APIs
+            // Clear all breakpoints for all APIs
             std::vector<size_t> allApiIndices;
             for (size_t i = 0; i < apis.size(); i++)
             {
@@ -589,26 +545,17 @@ PLUG_EXPORT void CBMENUENTRY(CBTYPE cbType, PLUG_CB_MENUENTRY* info)
             _plugin_logputs("[" PLUGIN_NAME "] Not debugging...");
         }
     }
-    // Check if this is a Reload Config menu entry
+
+    // Handle other menu entries
     else if (info->hEntry == MENU_RELOAD)
     {
         if (!ReloadConfig())
-        {
             MessageBoxW(GuiGetWindowHandle(), L"Error Loading config", L"Error", MB_ICONERROR);
-        }
     }
-    // Check if this is an About menu entry
     else if (info->hEntry == MENU_ABOUT)
-    {
-        MessageBoxW(GuiGetWindowHandle(),
-            L"A X64DBG plugin set breakpoints quickly\nMore info: https://github.com/Chomator/FastBP/",
-            L"FastBP", MB_ICONINFORMATION);
-    }
-    // Unknown menu entry
+        MessageBoxW(GuiGetWindowHandle(), L"A X64DBG plugin set breakpoints quickly\n\nMore info: https://github.com/Chomator/FastBP/", L"FastBP", MB_ICONINFORMATION);
     else
-    {
         _plugin_logprintf("[" PLUGIN_NAME "] Unknown menu entry %d...\n", info->hEntry);
-    }
 }
 
 #define EXPAND(x) L ## x

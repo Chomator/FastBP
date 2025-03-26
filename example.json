@@ -1,0 +1,34 @@
+{
+    "example": {
+        "Memory": {
+            "Apis": [
+                {
+                    "Name": "VirtualAlloc",
+                    "DllFunction": "kernel32.dll:VirtualAlloc",
+                    "Description": "Allocates a region of memory and sets its protection attributes",
+                    "ReturnValue": {
+                        "Type": "LPVOID",
+                        "Description": "address of allocated memory"
+                    },
+                    "Parameters": "LPVOID lpAddress, SIZE_T dwSize, DWORD flAllocationType, DWORD flProtect",
+                    "Extensions": {}
+                },
+                {
+                    "Name": "VirtualFree",
+                    "DllFunction": "kernel32.dll:VirtualFree",
+                    "Description": "Frees a region of memory previously allocated byVirtualAllocorVirtualAllocEx",
+                    "ReturnValue": {
+                        "Type": "BOOL",
+                        "Description": "TRUE if successful, FALSE if failed"
+                    },
+                    "Parameters": "LPVOID lpAddress, SIZE_T dwSize, DWORD dwFreeType",
+                    "Extensions": {}
+                }
+            ],
+            "ALL": [
+                "VirtualAlloc",
+                "VirtualFree"
+            ]
+        }
+    }
+}

@@ -2,7 +2,7 @@
 
 > Original idea by [SlothBP](https://github.com/x64dbg/SlothBP): https://github.com/x64dbg/SlothBP
 
-FastBP is a plugin that allows you to set breakpoints quickly and efficiently. It supports custom JSON configurations to define breakpoints for various API categories, such as memory operations, file I/O, and more.
+FastBP is a X64DBG plugin that allows you to set breakpoints quickly and efficiently. It supports custom JSON configurations to define breakpoints for various API categories, such as memory operations, file I/O, and more.
 
 ![](https://i.imgur.com/LL6Vryx.png)
 
@@ -22,42 +22,64 @@ The plugin uses a JSON file to define API categories and their corresponding bre
 
 ```json
 {
-  "Memory": {
-    "Basic": {
-      "ALL": ["VirtualAlloc", "VirtualFree"],
-      "VirtualAlloc": ["kernel32:VirtualAlloc", "Allocate memory"],
-      "VirtualFree": ["kernel32:VirtualFree", "Free allocated memory"]
-    },
-    "Heap": {
-      "ALL": ["HeapAlloc", "HeapFree"],
-      "HeapAlloc": ["kernel32:HeapAlloc", "Allocate from heap"],
-      "HeapFree": ["kernel32:HeapFree", "Free from heap"]
+    "example": {
+        "Memory": {
+            "Apis": [
+                {
+                    "Name": "VirtualAlloc",
+                    "DllFunction": "kernel32.dll:VirtualAlloc",
+                    "Description": "Allocates a region of memory and sets its protection attributes",
+                    "ReturnValue": {
+                        "Type": "LPVOID",
+                        "Description": "address of allocated memory"
+                    },
+                    "Parameters": "LPVOID lpAddress, SIZE_T dwSize, DWORD flAllocationType, DWORD flProtect",
+                    "Extensions": {}
+                },
+                {
+                    "Name": "VirtualFree",
+                    "DllFunction": "kernel32.dll:VirtualFree",
+                    "Description": "Frees a region of memory previously allocated byVirtualAllocorVirtualAllocEx",
+                    "ReturnValue": {
+                        "Type": "BOOL",
+                        "Description": "TRUE if successful, FALSE if failed"
+                    },
+                    "Parameters": "LPVOID lpAddress, SIZE_T dwSize, DWORD dwFreeType",
+                    "Extensions": {}
+                }
+            ],
+            "ALL": [
+                "VirtualAlloc",
+                "VirtualFree"
+            ]
+        }
     }
-  },
-  "File": {
-    "Read": {
-      "ALL": ["ReadFile", "ReadFileEx"],
-      "ReadFile": ["kernel32:ReadFile", "Read data from file"],
-      "ReadFileEx": ["kernel32:ReadFileEx", "Asynchronous read from file"]
-    },
-    "Write": {
-      "ALL": ["WriteFile", "WriteFileEx"],
-      "WriteFile": ["kernel32:WriteFile", "Write data to file"],
-      "WriteFileEx": ["kernel32:WriteFileEx", "Asynchronous write to file"]
-    }
-  }
 }
 ```
 
 ### JSON Structure Explained
 
-- **Top-Level Keys** (e.g., `"Memory"`, `"File"`): Represent high-level categories of APIs.
-- **Subcategories** (e.g., `"Basic"`, `"Heap"`): Group related APIs within a category.
-- **API Entries**:
-  - `"ALL"`: A list of all APIs in the subcategory. Used for batch operations like "Set All" or "Clear All".
-  - Individual API keys (e.g., `"VirtualAlloc"`, `"ReadFile"`): Each key maps to an array containing:
-    1. The API signature (e.g., `"kernel32:VirtualAlloc"`).
-    2. A description of the API's purpose (e.g., `"Allocate memory"`).
+You can also generate JSON from an XLSX file using **xlsx2json.py**.
+
+By default, **xlsx2json.py** reads **apis.xlsx**, but you can specify a different file by running:  
+```bash
+xlsx2json.py YourFile.xlsx
+```
+
+The example **apis.xlsx** file looked like this, and the **Extensions** tag is optional.
+
+| DLL          | API Name         | Description                                                  | Return Value                               | Parameters                                                   | Extensions |
+| ------------ | ---------------- | ------------------------------------------------------------ | ------------------------------------------ | ------------------------------------------------------------ | ---------- |
+| kernel32.dll | VirtualAlloc     | Allocates a region of memory and sets its protection attributes | LPVOID (address of allocated memory)       | LPVOID lpAddress, SIZE_T dwSize, DWORD flAllocationType, DWORD flProtect |            |
+| kernel32.dll | VirtualFree      | Frees a region of memory previously allocated by `VirtualAlloc` or `VirtualAllocEx` | BOOL (TRUE if successful, FALSE if failed) | LPVOID lpAddress, SIZE_T dwSize, DWORD dwFreeType            |            |
+| kernel32.dll | VirtualProtect   | Changes the protection attributes of a specified region of memory | BOOL (TRUE if successful, FALSE if failed) | LPVOID lpAddress, SIZE_T dwSize, DWORD flNewProtect, PDWORD lpOldProtect |            |
+| kernel32.dll | VirtualQuery     | Retrieves information about a range of pages in the virtual address space | SIZE_T (size of the queried memory region) | LPVOID lpAddress, PMEMORY_BASIC_INFORMATION lpBuffer, SIZE_T dwLength |            |
+| kernel32.dll | VirtualAllocEx   | Allocates a region of memory within the address space of a specified process and sets its protection attributes | LPVOID (address of allocated memory)       | HANDLE hProcess, LPVOID lpAddress, SIZE_T dwSize, DWORD flAllocationType, DWORD flProtect |            |
+| kernel32.dll | VirtualFreeEx    | Frees a region of memory previously allocated by `VirtualAllocEx` | BOOL (TRUE if successful, FALSE if failed) | HANDLE hProcess, LPVOID lpAddress, SIZE_T dwSize, DWORD dwFreeType |            |
+| kernel32.dll | VirtualProtectEx | Changes the protection attributes of a region of memory within the address space of a specified process | BOOL (TRUE if successful, FALSE if failed) | HANDLE hProcess, LPVOID lpAddress, SIZE_T dwSize, DWORD flNewProtect, PDWORD lpOldProtect |            |
+| kernel32.dll | VirtualQueryEx   | Retrieves information about a range of pages within the address space of a specified process | SIZE_T (size of the queried memory region) | HANDLE hProcess, LPVOID lpAddress, PMEMORY_BASIC_INFORMATION lpBuffer, SIZE_T dwLength |            |
+
+
 
 ---
 
@@ -77,22 +99,21 @@ The plugin uses a JSON file to define API categories and their corresponding bre
 ### Setting Breakpoints
 
 - Open the plugin's menu in x32/x64dbg.
-- Select the desired category (e.g., `"Memory"`) and subcategory (e.g., `"Basic"`).
 - Use the `"Set All"` option to set breakpoints for all APIs in the subcategory, or choose individual APIs.
 
 ### Customizing Breakpoints
 
+- update xlsx file, and generate JSON with xlsx2json.py.(suggestion)
 - Modify the JSON configuration file to add or remove APIs as needed.
-- Save the updated JSON file and reload config, or restart the debugger, to apply changes.
+- Copy JSON file to the plugin, and reload config, or restart the debugger, to apply changes.
 
 ---
 
 ## Notes
 
-- **`Set All` and `Clear All` Actions**:
-  - These actions are tied to the `"ALL"` tag in the JSON file. Ensure that the `"ALL"` key is correctly defined for each subcategory.
 - **JSON Validation**:
-  - Make sure the JSON file is properly formatted. You can use tools like [JSONLint](https://jsonlint.com/) to validate your configuration.
+  - Make sure the JSON file is properly formatted when you first run the plugin. You can use tools like [JSONLint](https://jsonlint.com/) to validate your configuration.
+  - If you generate JSON file with xlsx2json.py, don't worry, it works fine.
 
 ---
 

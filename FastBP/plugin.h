@@ -7,14 +7,22 @@
 #define PLUGIN_NAME "FastBP"
 #define PLUGIN_VERSION 1
 
-struct API
-{
-    std::string apiName;     // API function name or expression to evaluate
-    std::string bpName;      // Display name in menu
-    std::string category;    // Category for menu grouping
-    std::string description; // Description of what the API does
+struct ReturnValueInfo {
+    std::string Type;
+    std::string Description;
+};
+
+struct API {
+    std::string bpName;         // Menu display name
+    std::string apiName;        // Full function name (e.g., "kernel32.dll!CreateFile")
+    std::string description;    // Description of the API
+    std::string category;       // Category path
+    ReturnValueInfo returnValue; // Return value information
+    std::string parameters;     // Parameters as a string
+    std::string extensions;     // Extensions as a JSON string
     bool enabled = false;
 };
+
 
 enum MenuEntries
 {
@@ -22,7 +30,8 @@ enum MenuEntries
     MENU_CLEAR_ALL_BASE = 50000,  // Base for clear all menu entries
     MENU_CLEAR_ALL = 90000,       // Add this line for the Clear All BPs option
     MENU_RELOAD = 99999,
-    MENU_ABOUT = 100000
+    MENU_TOGGLE_MODE = 100000,
+    MENU_ABOUT = 100001
 };
 
 // Structure to store ALL tag information
