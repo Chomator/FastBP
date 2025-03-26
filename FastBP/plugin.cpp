@@ -1,4 +1,4 @@
-﻿//Original idea by https://github.com/x64dbg/SlothBP
+//Original idea by https://github.com/x64dbg/SlothBP
 
 #include "plugin.h"
 #include "resource.h"
@@ -114,11 +114,6 @@ static bool LoadApis(const wchar_t* apiFile)
     catch (const std::exception& e)
     {
         _plugin_logputs("Json Loading ERROR!!!");
-        return false;
-    }
-    catch (...)
-    {
-        _plugin_logputs("[" PLUGIN_NAME "] Unknown error occurred while loading APIs...");
         return false;
     }
     catch (...)
